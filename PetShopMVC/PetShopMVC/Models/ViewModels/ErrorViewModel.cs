@@ -1,6 +1,6 @@
 using System;
 
-namespace PetShopMVC.Models
+namespace PetShopMVC.Models.ViewModels
 {
     public class ErrorViewModel
     {
