@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace PetShopMVC.Models
 {
     public class PetShopMVCContext : DbContext
@@ -13,6 +14,9 @@ namespace PetShopMVC.Models
         {
         }
 
-        public DbSet<PetShopMVC.Models.Servico> Servico { get; set; }
+        public DbSet<Servico> Servico { get; set; }
+        public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<Agendamento> Agendamento { get; set; }
+
     }
 }
