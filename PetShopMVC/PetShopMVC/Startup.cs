@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using PetShopMVC.Models;
 using PetShopMVC.Data;
+using PetShopMVC.Services;
 
 namespace PetShopMVC
 {
@@ -42,6 +43,7 @@ namespace PetShopMVC
                     builder.MigrationsAssembly("PetShopMVC")));
 
             services.AddScoped<SeedingService>();
+            services.AddScoped<ClienteService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
