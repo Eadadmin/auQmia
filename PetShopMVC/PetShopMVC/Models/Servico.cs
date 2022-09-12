@@ -29,5 +29,11 @@ namespace PetShopMVC.Models
             Clientes.Add(cliente);
         }
 
+        public double ValorAgendamentos(DateTime initial, DateTime final) //
+        {
+            return Clientes.Sum(cliente => cliente.ValorAgendamentos(initial, final));
+        }
+
+
     }
 }

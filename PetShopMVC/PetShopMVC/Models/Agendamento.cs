@@ -25,6 +25,8 @@ namespace PetShopMVC.Models
             Valor = valor;
             Status = status;
             Cliente = cliente;
+            
+
         }
 
         

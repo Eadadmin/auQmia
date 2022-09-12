@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<PetShopMVC.Models.Cliente>
 @{
-    ViewData["Title"] = "Cliente";
+    ViewData["Title"] = "Clientes";
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -8,9 +8,6 @@
 <table class="table table-striped table-hover" >
     <thead>
         <tr class=" success">
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -23,9 +20,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Endereco)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Servico)
-            </th>
+
             <th></th>
         </tr>
 
@@ -34,9 +29,6 @@
         @foreach (var item in Model)
         {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
@@ -48,9 +40,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Endereco)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Servico)
             </td>
             <td>
                 <a asp-action="Edit" asp-all-route-id="@item.Id">Editar</a>

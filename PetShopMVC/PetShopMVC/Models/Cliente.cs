@@ -13,7 +13,7 @@ namespace PetShopMVC.Models
         public double Telefone { get; set; }
         public string Endereco { get; set; }
         public Servico Servico { get; set; }
-        public ICollection<Agendamento> Agendamento { get; set; } = new List<Agendamento>();
+        public ICollection<Agendamento> Agendamentos { get; set; } = new List<Agendamento>();
 
 
         public Cliente()
@@ -29,21 +29,26 @@ namespace PetShopMVC.Models
             Telefone = telefone;
             Endereco = endereco;
             Servico = servico;
+           
         }
-
+        
 
         public void AddAgendamento(Agendamento ag)
         {
-            Agendamento.Add(ag);
+            Agendamentos.Add(ag);
         }
 
 
         public void RemoveAgendamento(Agendamento ag)
         {
-            Agendamento.Remove(ag);
+            Agendamentos.Remove(ag);
         }
 
         
+        public double ValorAgendamentos (DateTime initial, DateTime final) //
+        {
+            return Agendamentos.Where(ag => ag.Date >= initial && ag.Date <= final).Sum(ag => ag.Valor);
+        }          
 
     }
 }

@@ -8,11 +8,11 @@ using PetShopMVC.Services;
 namespace PetShopMVC.Controllers
 { 
    
-    public class ClienteController : Controller
+    public class ClientesController : Controller
     {
         private readonly ClienteService _clienteService;
 
-        public ClienteController (ClienteService clienteService)
+        public ClientesController (ClienteService clienteService)
         {
             _clienteService = clienteService;
         }
