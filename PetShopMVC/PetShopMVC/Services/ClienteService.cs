@@ -19,5 +19,12 @@ namespace PetShopMVC.Services
         {
             return _context.Cliente.ToList();
         }
+        
+        public void Insert(Cliente obj)
+        {
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
     }
+    
 }
