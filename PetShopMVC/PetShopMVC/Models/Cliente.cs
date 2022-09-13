@@ -10,9 +10,10 @@ namespace PetShopMVC.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string Email { get; set; }
-        public double Telefone { get; set; }
+        public string Telefone { get; set; }
         public string Endereco { get; set; }
         public Servico Servico { get; set; }
+        public int ServicoId { get; set; }
         public ICollection<Agendamento> Agendamentos { get; set; } = new List<Agendamento>();
 
 
@@ -21,7 +22,7 @@ namespace PetShopMVC.Models
 
         }
 
-        public Cliente(int id, string name, string email, double telefone, string endereco, Servico servico)
+        public Cliente(int id, string name, string email, string telefone, string endereco, Servico servico)
         {
             Id = id;
             Name = name;
