@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using PetShopMVC.Models;
+using PetShopMVC.Models.ViewModels;
 using PetShopMVC.Services;
 
 namespace PetShopMVC.Controllers
@@ -12,10 +13,13 @@ namespace PetShopMVC.Controllers
     public class ClientesController : Controller
     {
         private readonly ClienteService _clienteService;
+        private readonly ServicoService _servicoService;
 
-        public ClientesController (ClienteService clienteService)
+        public ClientesController (ClienteService clienteService, ServicoService servicoService)
         {
             _clienteService = clienteService;
+            _servicoService = servicoService;
+
         }
     
     
@@ -28,8 +32,11 @@ namespace PetShopMVC.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            var servicos = _servicoService.FindAll();
+            var viewModel = new ClienteFormViewModel { Servicos = servicos };
+            return View(viewModel);
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Cliente cliente)

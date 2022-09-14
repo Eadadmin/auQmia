@@ -22,7 +22,6 @@ namespace PetShopMVC.Services
         
         public void Insert(Cliente obj)
         {
-            obj.Servico = _context.Servico.First();
             _context.Add(obj);
             _context.SaveChanges();
         }
