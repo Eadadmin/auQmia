@@ -25,6 +25,18 @@ namespace PetShopMVC.Services
             _context.Add(obj);
             _context.SaveChanges();
         }
+
+        public Cliente FindById(int id)
+        {
+            return _context.Cliente.FirstOrDefault(obj => obj.Id == id);
+
+        }
+        public void Remove(int id)
+        {
+            var obj = _context.Cliente.Find(id);
+            _context.Cliente.Remove(obj);
+            _context.SaveChanges();
+;        }
     }
     
 }
