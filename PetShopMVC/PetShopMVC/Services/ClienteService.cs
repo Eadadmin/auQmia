@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace PetShopMVC.Services
 {
@@ -28,7 +29,7 @@ namespace PetShopMVC.Services
 
         public Cliente FindById(int id)
         {
-            return _context.Cliente.FirstOrDefault(obj => obj.Id == id);
+            return _context.Cliente.Include(obj => obj.Servico).FirstOrDefault(obj => obj.Id == id);
 
         }
         public void Remove(int id)
