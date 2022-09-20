@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using PetShopMVC.Services.Exceptions;
 
 namespace PetShopMVC.Services
 {
@@ -29,7 +30,7 @@ namespace PetShopMVC.Services
 
         public Cliente FindById(int id)
         {
-            return _context.Cliente.Include(obj => obj.Servico).FirstOrDefault(obj => obj.Id == id);
+            return _context.Cliente.Include(obj => obj.Servico).FirstOrDefault(obj => obj.id == id);
 
         }
         public void Remove(int id)
@@ -37,7 +38,24 @@ namespace PetShopMVC.Services
             var obj = _context.Cliente.Find(id);
             _context.Cliente.Remove(obj);
             _context.SaveChanges();
-;        }
+        }
+
+        public void Update(Cliente obj)
+        {
+            if (!_context.Cliente.Any(x => x.Id == obj.Id))
+            {
+                throw new NotFoundException(" Id not found");
+            }
+            try
+            {
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
+        }
     }
     
 }
