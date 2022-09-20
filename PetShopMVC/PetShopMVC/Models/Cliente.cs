@@ -18,7 +18,7 @@ namespace PetShopMVC.Models
         public Servico Servico { get; set; }
         public int ServicoId { get; set; }
         public ICollection<Agendamento> Agendamentos { get; set; } = new List<Agendamento>();
-        public int Id { get; internal set; }
+ 
 
         public Cliente()
         {
