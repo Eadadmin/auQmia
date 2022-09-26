@@ -43,7 +43,15 @@ namespace PetShopMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Cliente cliente)
         {
-            _clienteService.Insert(cliente);
+            if (!ModelState.IsValid)
+            {
+                var Servicos = _servicoService.FindAll();
+                var viewModel = new ClienteFormViewModel { Cliente = cliente, Servicos = Servicos };
+
+                return View(viewModel);
+            }
+
+                _clienteService.Insert(cliente);
             return RedirectToAction(nameof(Index));
         }
 
@@ -110,6 +118,13 @@ namespace PetShopMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Cliente cliente)
         {
+            if (!ModelState.IsValid)
+            {
+                var Servicos = _servicoService.FindAll();
+                var viewModel = new ClienteFormViewModel { Cliente = cliente, Servicos = Servicos };
+
+                return View(viewModel);
+            }
             if (id != Cliente.id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não corresponde" });

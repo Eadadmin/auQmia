@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,11 +12,22 @@ namespace PetShopMVC.Models
         private int _id;
 
         public int Id { get => _id; set => _id = value; }
+
+        [Required]
+        [StringLength(60, MinimumLength = 3, ErrorMessage = "O tamanho do nome deve ser entre 3 e 60")]
         public string Name { get; set; }
+        [Required]
+        [EmailAddress(ErrorMessage = "Entre com um email válido")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        [Required]
         public string Telefone { get; set; }
+        [Required]
         public string Endereco { get; set; }
+        [Required]
         public Servico Servico { get; set; }
+        [Required]
         public int ServicoId { get; set; }
         public ICollection<Agendamento> Agendamentos { get; set; } = new List<Agendamento>();
  
