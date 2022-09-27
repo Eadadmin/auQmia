@@ -25,7 +25,6 @@ namespace PetShopMVC.Models
         public string Telefone { get; set; }
         [Required]
         public string Endereco { get; set; }
-        [Required]
         public Servico Servico { get; set; }
         [Required]
         public int ServicoId { get; set; }
