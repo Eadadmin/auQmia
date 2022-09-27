@@ -25,44 +25,44 @@ namespace PetShopMVC.Controllers
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
 
         {
-            var list = _clienteService.FindAll();
+            var list = await _clienteService.FindAllAsync();
             return View(list);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var servicos = _servicoService.FindAll();
+            var servicos = await _servicoService.FindAllAsync();
             var viewModel = new ClienteFormViewModel { Servicos = servicos };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Cliente cliente)
+        public async Task<IActionResult> Create(Cliente cliente)
         {
             if (!ModelState.IsValid)
             {
-                var Servicos = _servicoService.FindAll();
+                var Servicos = await _servicoService.FindAllAsync();
                 var viewModel = new ClienteFormViewModel { Cliente = cliente, Servicos = Servicos };
 
                 return View(viewModel);
             }
 
-                _clienteService.Insert(cliente);
+                await _clienteService.InsertAsync(cliente);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var obj = _clienteService.FindById(id.Value);
+            var obj = await _clienteService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return NotFound();
@@ -73,20 +73,27 @@ namespace PetShopMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _clienteService.Remove(id);
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                await _clienteService.RemoveAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (IntegrityException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não não fornecido" });
             }
 
-            var obj = _clienteService.FindById(id.Value);
+            var obj = await _clienteService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não existe" });
@@ -95,20 +102,20 @@ namespace PetShopMVC.Controllers
             return View(obj);
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" });
             }
 
-            var obj = _clienteService.FindById(id.Value);
+            var obj = await _clienteService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não existe" });
             }
 
-            List<Servico> servicos = _servicoService.FindAll();
+            List<Servico> servicos = await _servicoService.FindAllAsync();
             ClienteFormViewModel viewModel = new ClienteFormViewModel { Cliente = obj, Servicos = servicos };
             return View(viewModel);
 
@@ -116,11 +123,11 @@ namespace PetShopMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Cliente cliente)
+        public async Task<IActionResult> Edit(int id, Cliente cliente)
         {
             if (!ModelState.IsValid)
             {
-                var Servicos = _servicoService.FindAll();
+                var Servicos = await _servicoService.FindAllAsync();
                 var viewModel = new ClienteFormViewModel { Cliente = cliente, Servicos = Servicos };
 
                 return View(viewModel);
@@ -131,7 +138,7 @@ namespace PetShopMVC.Controllers
             }
             try
             {
-                _clienteService.Update(cliente);
+                await _clienteService.UpdateAsync(cliente);
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)

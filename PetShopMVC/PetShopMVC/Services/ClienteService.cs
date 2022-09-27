@@ -17,44 +17,58 @@ namespace PetShopMVC.Services
             _context = context;           
         }
 
-        public List<Cliente> FindAll()
+        public async Task<List<Cliente>> FindAllAsync()
         {
-            return _context.Cliente.ToList();
+            return await _context.Cliente.ToListAsync();
         }
         
-        public void Insert(Cliente obj)
+        public async Task InsertAsync(Cliente obj)
         {
             _context.Add(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public Cliente FindById(int id)
+        public async Task<Cliente> FindByIdAsync(int id)
         {
-            return _context.Cliente.Include(obj => obj.Servico).FirstOrDefault(obj => obj.Id == id);
+            return await _context.Cliente.Include(obj => obj.Servico).FirstOrDefaultAsync(obj => obj.Id == id);
 
         }
-        public void Remove(int id)
+        public async Task RemoveAsync(int id)
         {
-            var obj = _context.Cliente.Find(id);
-            _context.Cliente.Remove(obj);
-            _context.SaveChanges();
+            try
+            {
+
+                var obj = await _context.Cliente.FindAsync(id);
+                _context.Cliente.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException e)
+            {
+                throw new IntegrityException(e.Message);
+            }
         }
 
-        public void Update(Cliente obj)
+        public async Task UpdateAsync(Cliente obj)
         {
-            if (!_context.Cliente.Any(x => x.Id == obj.Id))
+            bool hasAny = await _context.Cliente.AnyAsync(x => x.Id == obj.Id);
+            if (!hasAny)
             {
                 throw new NotFoundException(" Id not found");
             }
             try
             {
                 _context.Update(obj);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException e)
             {
                 throw new DbConcurrencyException(e.Message);
             }
+        }
+
+        internal Task UpdateAsynv(Cliente cliente)
+        {
+            throw new NotImplementedException();
         }
     }
     
