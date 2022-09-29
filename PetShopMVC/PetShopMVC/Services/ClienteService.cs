@@ -42,9 +42,9 @@ namespace PetShopMVC.Services
                 _context.Cliente.Remove(obj);
                 await _context.SaveChangesAsync();
             }
-            catch (DbUpdateException e)
+            catch (DbUpdateException)
             {
-                throw new IntegrityException(e.Message);
+                throw new IntegrityException("Não posso excluir porque o cliente tem serviços");
             }
         }
 
@@ -53,7 +53,7 @@ namespace PetShopMVC.Services
             bool hasAny = await _context.Cliente.AnyAsync(x => x.Id == obj.Id);
             if (!hasAny)
             {
-                throw new NotFoundException(" Id not found");
+                throw new NotFoundException(" Id não encontrado");
             }
             try
             {

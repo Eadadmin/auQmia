@@ -45,8 +45,8 @@ namespace PetShopMVC.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var Servicos = await _servicoService.FindAllAsync();
-                var viewModel = new ClienteFormViewModel { Cliente = cliente, Servicos = Servicos };
+                var servicos = await _servicoService.FindAllAsync();
+                var viewModel = new ClienteFormViewModel { Cliente = cliente, Servicos = servicos };
 
                 return View(viewModel);
             }
@@ -59,13 +59,15 @@ namespace PetShopMVC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não Fornecido" });
+
             }
 
             var obj = await _clienteService.FindByIdAsync(id.Value);
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não Encontrado" });
+
             }
 
             return View(obj);
@@ -90,7 +92,7 @@ namespace PetShopMVC.Controllers
         {
             if (id == null)
             {
-                return RedirectToAction(nameof(Error), new { message = "Id não não fornecido" });
+                return RedirectToAction(nameof(Error), new { message = "Id não fornecido" });
             }
 
             var obj = await _clienteService.FindByIdAsync(id.Value);
@@ -127,20 +129,22 @@ namespace PetShopMVC.Controllers
         {
             if (!ModelState.IsValid)
             {
-                var Servicos = await _servicoService.FindAllAsync();
-                var viewModel = new ClienteFormViewModel { Cliente = cliente, Servicos = Servicos };
+                var servicos = await _servicoService.FindAllAsync();
+                var viewModel = new ClienteFormViewModel { Cliente = cliente, Servicos = servicos };
 
                 return View(viewModel);
             }
-            if (id != Cliente.id)
+            if (id != cliente.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não corresponde" });
             }
+
             try
             {
                 await _clienteService.UpdateAsync(cliente);
                 return RedirectToAction(nameof(Index));
             }
+
             catch (ApplicationException e)
             {
                 return RedirectToAction(nameof(Error), new { message = e. Message });
