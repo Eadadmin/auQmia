@@ -40,7 +40,7 @@ namespace PetShopMVC.Data
             Agendamento ag2 = new Agendamento(2, new DateTime(2022, 10, 15), 15.0, AgendamentoStatus.Pendente, c1);
             Agendamento ag3 = new Agendamento(3, new DateTime(2022, 10, 15), 5.0, AgendamentoStatus.Pendente, c2);
             Agendamento ag4 = new Agendamento(4, new DateTime(2022, 10, 15), 10.0, AgendamentoStatus.Pendente, c2);
-            Agendamento ag5 = new Agendamento(5, new DateTime(2022, 10, 15), 20.0, AgendamentoStatus.Pendente, c3);
+            Agendamento ag5 = new Agendamento(5, new DateTime(2022, 10,15), 20.0, AgendamentoStatus.Pendente, c3);
             Agendamento ag6 = new Agendamento(6, new DateTime(2022, 10, 12), 20.0, AgendamentoStatus.Realizado, c1);
             Agendamento ag7 = new Agendamento(7, new DateTime(2022, 10, 12), 20.0, AgendamentoStatus.Realizado, c2);
             Agendamento ag8 = new Agendamento(8, new DateTime(2022, 10, 12), 20.0, AgendamentoStatus.Realizado, c2);

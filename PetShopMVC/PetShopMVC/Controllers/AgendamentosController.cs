@@ -11,6 +11,12 @@ namespace PetShopMVC.Controllers
     {
         private readonly AgendamentoService _agendamentoService;
 
+
+        public AgendamentosController(AgendamentoService agendamentoService)
+        {
+            _agendamentoService = agendamentoService;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -19,7 +25,7 @@ namespace PetShopMVC.Controllers
         public async Task<IActionResult> SimpleSearch(DateTime? minDate, DateTime? maxDate)
         {
             var result = await _agendamentoService.FindByDateAsync(minDate, maxDate);
-            return View();
+            return View(result);
         }
 
 
