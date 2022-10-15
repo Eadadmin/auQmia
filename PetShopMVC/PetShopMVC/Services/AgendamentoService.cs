@@ -36,7 +36,7 @@ namespace PetShopMVC.Services
                 .Include(x => x.Cliente.Servico)
                 .OrderByDescending(x => x.Date)
                 .ToListAsync();
-        }
 
+        }
     }
 }
