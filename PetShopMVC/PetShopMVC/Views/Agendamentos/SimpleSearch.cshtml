@@ -48,6 +48,9 @@
                         @Html.DisplayNameFor(model => model.Cliente.Servico)
                     </th>
                     <th>
+                        @Html.DisplayNameFor(model => model.Cliente.Animal)
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.Valor)
                     </th>
                 </tr>
@@ -72,9 +75,12 @@
                         @Html.DisplayFor(modelItem => item.Cliente.Servico.Name)
                     </td>
                     <td>
+                        @Html.DisplayFor(modelItem => item.Cliente.Animal)
+                    </td>
+                    <td>
                         @Html.DisplayFor(modelItem => item.Valor)
                     </td>
-                  
+
                 </tr>
                 }
             </tbody>

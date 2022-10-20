@@ -30,10 +30,10 @@ namespace PetShopMVC.Data
             Servico s3 = new Servico(3, "Corte de Unhas");
             Servico s4 = new Servico(4, "Limpeza de Ouvido");
 
-            Cliente c1 = new Cliente(1, "Marcelo Santos", "marcelo.santos@gmail.com", "967585821", "Rua Maria das Graças , 12 - Santo André - SP", s1);
-            Cliente c2 = new Cliente(2, "Josefina de Souza", "josefina@gmail.com", "989578477", "Rua Alto da Bela Vista , 20 - Mauá - SP", s2);
-            Cliente c3 = new Cliente(3, "Antonio Carlos Pereira", "antoniop@gmail.com", "964846895", "Rua Forte dos Reis Magos, 25 - Guarulhos - SP", s3);
-            Cliente c4 = new Cliente(4, "Experidião Joaquim Marques", "ejoaquimmarques@gmail.com", "968978452", "Rua Imperatriz , 58 - Lapa - SP", s4);
+            Cliente c1 = new Cliente(1, "Marcelo Santos", "marcelo.santos@gmail.com", "967585821", "Rua Maria das Graças , 12 - Santo André - SP", s1, "Gato");
+            Cliente c2 = new Cliente(2, "Josefina de Souza", "josefina@gmail.com", "989578477", "Rua Alto da Bela Vista , 20 - Mauá - SP", s2, "Cachorro");
+            Cliente c3 = new Cliente(3, "Antonio Carlos Pereira", "antoniop@gmail.com", "964846895", "Rua Forte dos Reis Magos, 25 - Guarulhos - SP", s3, "Gato");
+            Cliente c4 = new Cliente(4, "Experidião Joaquim Marques", "ejoaquimmarques@gmail.com", "968978452", "Rua Imperatriz , 58 - Lapa - SP", s4, "Cachorro");
 
 
             Agendamento ag1 = new Agendamento(1, new DateTime(2022, 10, 15), 20.0, AgendamentoStatus.Pendente, c1);
