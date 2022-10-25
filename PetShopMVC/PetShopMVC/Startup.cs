@@ -47,7 +47,7 @@ namespace PetShopMVC
             services.AddScoped<SeedingService>();
             services.AddScoped<ClienteService>();
             services.AddScoped<ServicoService>();
-
+            services.AddScoped<AgendamentoService>();
 
         }
 

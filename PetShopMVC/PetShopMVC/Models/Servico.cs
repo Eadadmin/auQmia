@@ -8,7 +8,7 @@ namespace PetShopMVC.Models
 {
     public class Servico
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public ICollection<Cliente> Clientes { get; set; } = new List<Cliente>();
 
@@ -18,9 +18,9 @@ namespace PetShopMVC.Models
         {
         }
 
-        public Servico(int iD, string name)
+        public Servico(int id, string name)
         {
-            ID = iD;
+            Id = id;
             Name = name;
         }
 

@@ -23,7 +23,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Endereco)
             </th>
-
+            <th>
+                @Html.DisplayNameFor(model => model.Animal)
+            </th>
             <th></th>
         </tr>
 
@@ -43,6 +45,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Endereco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Animal)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-Id="@item.Id">Editar</a>

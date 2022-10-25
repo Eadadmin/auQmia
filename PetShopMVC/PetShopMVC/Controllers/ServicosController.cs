@@ -33,7 +33,7 @@ namespace PetShopMVC.Controllers
             }
 
             var servico = await _context.Servico
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (servico == null)
             {
                 return NotFound();
@@ -53,7 +53,7 @@ namespace PetShopMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name")] Servico servico)
+        public async Task<IActionResult> Create([Bind("Id,Name")] Servico servico)
         {
             if (ModelState.IsValid)
             {
@@ -85,9 +85,9 @@ namespace PetShopMVC.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name")] Servico servico)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name")] Servico servico)
         {
-            if (id != servico.ID)
+            if (id != servico.Id)
             {
                 return NotFound();
             }
@@ -101,7 +101,7 @@ namespace PetShopMVC.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ServicoExists(servico.ID))
+                    if (!ServicoExists(servico.Id))
                     {
                         return NotFound();
                     }
@@ -124,7 +124,7 @@ namespace PetShopMVC.Controllers
             }
 
             var servico = await _context.Servico
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (servico == null)
             {
                 return NotFound();
@@ -146,7 +146,7 @@ namespace PetShopMVC.Controllers
 
         private bool ServicoExists(int id)
         {
-            return _context.Servico.Any(e => e.ID == id);
+            return _context.Servico.Any(e => e.Id == id);
         }
     }
 }
