@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PetShopMVC.Models;
 
 namespace PetShopMVC.Migrations
 {
     [DbContext(typeof(PetShopMVCContext))]
-    partial class PetShopMVCContextModelSnapshot : ModelSnapshot
+    [Migration("20221103132814_Servico")]
+    partial class Servico
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,13 +97,11 @@ namespace PetShopMVC.Migrations
 
                     b.Property<int>("ClienteId");
 
-                    b.Property<int?>("CustomizarId");
-
                     b.Property<DateTime>("OrdemData");
 
                     b.HasKey("OrdemId");
 
-                    b.HasIndex("CustomizarId");
+                    b.HasIndex("ClienteId");
 
                     b.ToTable("Ordem");
                 });
@@ -111,7 +111,7 @@ namespace PetShopMVC.Migrations
                     b.Property<int>("OrdemDetalheId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("CustomizarId");
+                    b.Property<int?>("ClienteId");
 
                     b.Property<int>("OrdemId");
 
@@ -119,40 +119,19 @@ namespace PetShopMVC.Migrations
 
                     b.Property<decimal>("Preco");
 
-                    b.Property<int?>("ProdutoId");
-
                     b.Property<int>("ServicoId");
 
                     b.Property<string>("ServicoName");
 
                     b.HasKey("OrdemDetalheId");
 
-                    b.HasIndex("CustomizarId");
+                    b.HasIndex("ClienteId");
 
                     b.HasIndex("OrdemId");
-
-                    b.HasIndex("ProdutoId");
 
                     b.HasIndex("ServicoId");
 
                     b.ToTable("OrdemDetalhe");
-                });
-
-            modelBuilder.Entity("PetShopMVC.Models.Produto", b =>
-                {
-                    b.Property<int>("ProdutoId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Descricao")
-                        .IsRequired();
-
-                    b.Property<decimal>("Preco");
-
-                    b.Property<DateTime>("UltimaCompra");
-
-                    b.HasKey("ProdutoId");
-
-                    b.ToTable("Produto");
                 });
 
             modelBuilder.Entity("PetShopMVC.Models.Servico", b =>
@@ -194,25 +173,22 @@ namespace PetShopMVC.Migrations
 
             modelBuilder.Entity("PetShopMVC.Models.Ordem", b =>
                 {
-                    b.HasOne("PetShopMVC.Models.Customizar", "Customizar")
+                    b.HasOne("PetShopMVC.Models.Cliente", "Cliente")
                         .WithMany("Ordem")
-                        .HasForeignKey("CustomizarId");
+                        .HasForeignKey("ClienteId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PetShopMVC.Models.OrdemDetalhe", b =>
                 {
-                    b.HasOne("PetShopMVC.Models.Customizar", "Customizar")
-                        .WithMany()
-                        .HasForeignKey("CustomizarId");
+                    b.HasOne("PetShopMVC.Models.Cliente", "Cliente")
+                        .WithMany("OrdemDetalhe")
+                        .HasForeignKey("ClienteId");
 
                     b.HasOne("PetShopMVC.Models.Ordem", "Ordem")
                         .WithMany("OrdemDetalhe")
                         .HasForeignKey("OrdemId")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("PetShopMVC.Models.Produto")
-                        .WithMany("OrdensDetalhes")
-                        .HasForeignKey("ProdutoId");
 
                     b.HasOne("PetShopMVC.Models.Servico", "Servico")
                         .WithMany("OrdemDetalhe")

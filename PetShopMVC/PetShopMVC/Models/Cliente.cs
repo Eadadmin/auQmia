@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PetShopMVC.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -34,9 +35,11 @@ namespace PetShopMVC.Models
 
         [Required]
         public int ServicoId { get; set; }
-        public ICollection<Agendamento> Agendamentos { get; set; } = new List<Agendamento>();
 
- 
+        public ICollection<Agendamento> Agendamentos { get; set; } = new List<Agendamento>();
+          
+
+
 
         public Cliente()
         {

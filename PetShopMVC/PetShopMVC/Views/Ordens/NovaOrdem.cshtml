@@ -1,0 +1,30 @@
+﻿@model PetShopMVC.Models.ViewModels.OrdemView
+
+@{
+    ViewBag.Title = "NovaOrdem";
+}
+<h2>Nova Ordem</h2>
+
+<div class="form-horizontal">
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Customizar.CustomizarId, "Name", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("CustomizarId", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Customizar.CustomizarId, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+
+    @Html.ActionLink("Adicionar Servico", "AddServico", new { }, new { @class = "btn btn-primary" })
+
+
+
+
+    <input type="submit" value="Criar Ordem" id="NovaOrdem" class="btn btn-default" />
+    
+
+</div>
+

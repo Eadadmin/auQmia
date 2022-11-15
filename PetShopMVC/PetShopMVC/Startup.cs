@@ -48,6 +48,8 @@ namespace PetShopMVC
             services.AddScoped<ClienteService>();
             services.AddScoped<ServicoService>();
             services.AddScoped<AgendamentoService>();
+           
+           
 
         }
 

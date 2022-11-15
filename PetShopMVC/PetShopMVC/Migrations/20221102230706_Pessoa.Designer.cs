@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PetShopMVC.Models;
 
 namespace PetShopMVC.Migrations
 {
     [DbContext(typeof(PetShopMVCContext))]
-    partial class PetShopMVCContextModelSnapshot : ModelSnapshot
+    [Migration("20221102230706_Pessoa")]
+    partial class Pessoa
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -88,81 +90,12 @@ namespace PetShopMVC.Migrations
                     b.ToTable("Customizar");
                 });
 
-            modelBuilder.Entity("PetShopMVC.Models.Ordem", b =>
-                {
-                    b.Property<int>("OrdemId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("ClienteId");
-
-                    b.Property<int?>("CustomizarId");
-
-                    b.Property<DateTime>("OrdemData");
-
-                    b.HasKey("OrdemId");
-
-                    b.HasIndex("CustomizarId");
-
-                    b.ToTable("Ordem");
-                });
-
-            modelBuilder.Entity("PetShopMVC.Models.OrdemDetalhe", b =>
-                {
-                    b.Property<int>("OrdemDetalheId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int?>("CustomizarId");
-
-                    b.Property<int>("OrdemId");
-
-                    b.Property<int>("OrdemStatus");
-
-                    b.Property<decimal>("Preco");
-
-                    b.Property<int?>("ProdutoId");
-
-                    b.Property<int>("ServicoId");
-
-                    b.Property<string>("ServicoName");
-
-                    b.HasKey("OrdemDetalheId");
-
-                    b.HasIndex("CustomizarId");
-
-                    b.HasIndex("OrdemId");
-
-                    b.HasIndex("ProdutoId");
-
-                    b.HasIndex("ServicoId");
-
-                    b.ToTable("OrdemDetalhe");
-                });
-
-            modelBuilder.Entity("PetShopMVC.Models.Produto", b =>
-                {
-                    b.Property<int>("ProdutoId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Descricao")
-                        .IsRequired();
-
-                    b.Property<decimal>("Preco");
-
-                    b.Property<DateTime>("UltimaCompra");
-
-                    b.HasKey("ProdutoId");
-
-                    b.ToTable("Produto");
-                });
-
             modelBuilder.Entity("PetShopMVC.Models.Servico", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
-
-                    b.Property<decimal>("Preco");
 
                     b.HasKey("Id");
 
@@ -188,34 +121,6 @@ namespace PetShopMVC.Migrations
                 {
                     b.HasOne("PetShopMVC.Models.Servico", "Servico")
                         .WithMany("Customizacao")
-                        .HasForeignKey("ServicoId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("PetShopMVC.Models.Ordem", b =>
-                {
-                    b.HasOne("PetShopMVC.Models.Customizar", "Customizar")
-                        .WithMany("Ordem")
-                        .HasForeignKey("CustomizarId");
-                });
-
-            modelBuilder.Entity("PetShopMVC.Models.OrdemDetalhe", b =>
-                {
-                    b.HasOne("PetShopMVC.Models.Customizar", "Customizar")
-                        .WithMany()
-                        .HasForeignKey("CustomizarId");
-
-                    b.HasOne("PetShopMVC.Models.Ordem", "Ordem")
-                        .WithMany("OrdemDetalhe")
-                        .HasForeignKey("OrdemId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("PetShopMVC.Models.Produto")
-                        .WithMany("OrdensDetalhes")
-                        .HasForeignKey("ProdutoId");
-
-                    b.HasOne("PetShopMVC.Models.Servico", "Servico")
-                        .WithMany("OrdemDetalhe")
                         .HasForeignKey("ServicoId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
