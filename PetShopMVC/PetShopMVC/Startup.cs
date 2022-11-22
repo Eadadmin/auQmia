@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Globalization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -10,8 +11,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Localization;
 using PetShopMVC.Models;
 using PetShopMVC.Data;
+using PetShopMVC.Services;
 
 namespace PetShopMVC
 {
@@ -42,11 +45,30 @@ namespace PetShopMVC
                     builder.MigrationsAssembly("PetShopMVC")));
 
             services.AddScoped<SeedingService>();
+            services.AddScoped<ClienteService>();
+            services.AddScoped<ServicoService>();
+            services.AddScoped<AgendamentoService>();
+           
+           
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedingService seedingService)
         {
+
+            var enBr = new CultureInfo("en-Br");
+            var localizationOppitions = new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture(enBr),
+                SupportedCultures = new List<CultureInfo> { enBr },
+                SupportedUICultures = new List<CultureInfo> { enBr }
+            };
+
+            app.UseRequestLocalization(localizationOppitions);
+
+
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

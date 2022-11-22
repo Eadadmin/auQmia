@@ -1,0 +1,60 @@
+﻿@model IEnumerable<PetShopMVC.Models.Cliente>
+@{
+    ViewData["Title"] = "Clientes";
+}
+
+<h2>@ViewData["Title"]</h2>
+<p>
+    <a asp-action="Create" class="btn btn-default">Criar</a>
+</p>
+
+<table class="table table-striped table-hover" >
+    <thead>
+        <tr class=" success">
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Telefone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Endereco)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Animal)
+            </th>
+            <th></th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Telefone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Endereco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Animal)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-Id="@item.Id">Editar</a>
+                <a asp-action="Details" asp-route-Id="@item.Id">Detalhes</a>
+                <a asp-action="Delete" asp-route-Id="@item.Id">Deletar</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
